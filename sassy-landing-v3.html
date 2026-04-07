@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sassy — Considered Small Things</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Ultra&family=Questrial&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:   #0c0c0c;
+  --off-black: #111111;
+  --light:   #F0F0EC;
+  --white:   #FAFAF8;
+  --orange:  #ff5400;
+  --orange-dim: rgba(255, 84, 0, 0.12);
+  --mid:     #888880;
+  --border-dark: rgba(255,255,255,0.08);
+  --border-light: rgba(0,0,0,0.1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Questrial', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  border-bottom: 1px solid var(--border-dark);
+  background: rgba(12,12,12,0.85);
+  backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  font-family: 'Ultra', serif;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: var(--white);
+}
+
+.nav-logo span { color: var(--orange); }
+.nav-y { color: var(--orange); }
+
+.nav-links {
+  display: flex; gap: 32px; align-items: center;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Questrial', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  padding: 8px 20px;
+  border: 1px solid var(--orange);
+  color: var(--orange) !important;
+  border-radius: 2px;
+  transition: background 0.2s, color 0.2s !important;
+}
+
+.nav-cta:hover {
+  background: var(--orange) !important;
+  color: var(--black) !important;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 48px 80px;
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.hero-bg-text {
+  position: absolute;
+  top: 50%; left: -10px;
+  transform: translateY(-55%);
+  font-family: 'Ultra', serif;
+  font-size: clamp(160px, 22vw, 320px);
+  color: rgba(255,255,255,0.025);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.hero-tag {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 28px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero-tag::before {
+  content: '';
+  display: block; width: 24px; height: 1px;
+  background: var(--orange);
+}
+
+.hero h1 {
+  font-family: 'Ultra', serif;
+  font-size: clamp(52px, 8vw, 120px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+  opacity: 0; animation: fadeUp 0.9s ease forwards 0.4s;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--orange);
+  -webkit-text-stroke: 0px;
+}
+
+.what-card:hover {
+  background: var(--light);
+  border-top: 3px solid var(--orange);
+}
+
+.hero-sub {
+  margin-top: 32px;
+  font-size: 18px;
+  color: rgba(255,255,255,0.5);
+  max-width: 520px;
+  line-height: 1.7;
+  opacity: 0; animation: fadeUp 0.9s ease forwards 0.6s;
+}
+
+.hero-sub strong {
+  color: rgba(255,255,255,0.85);
+  font-weight: normal;
+}
+
+.hero-scroll {
+  position: absolute; bottom: 40px; right: 48px;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  display: flex; align-items: center; gap: 10px;
+  opacity: 0; animation: fadeUp 0.9s ease forwards 1s;
+}
+
+.hero-scroll::after {
+  content: '';
+  display: block; width: 40px; height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* ── ABOUT STRIP ── */
+.about-strip {
+  background: var(--orange);
+  padding: 20px 48px;
+  display: flex; align-items: center; gap: 48px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.about-strip::-webkit-scrollbar { display: none; }
+
+.about-strip::after {
+  content: '';
+  flex-shrink: 0;
+  width: 48px;
+}
+
+.about-strip p {
+  font-family: 'Ultra', serif;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  white-space: nowrap;
+}
+
+.strip-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(0,0,0,0.3); flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .about-strip {
+    padding: 14px 20px;
+    gap: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .about-strip::-webkit-scrollbar { display: none; }
+  .about-strip p { font-size: 11px; }
+  .strip-dot { width: 4px; height: 4px; }
+}
+
+/* ── SECTION: WHAT ── */
+.what {
+  background: var(--light);
+  color: var(--black);
+  padding: 120px 48px;
+}
+
+.section-tag {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 48px;
+}
+
+.section-tag::before {
+  content: '';
+  display: block; width: 20px; height: 1px;
+  background: var(--orange);
+}
+
+.what h2 {
+  font-family: 'Ultra', serif;
+  font-size: clamp(36px, 5vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 800px;
+  margin-bottom: 48px;
+}
+
+.what-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border-light);
+  border: 1px solid var(--border-light);
+  margin-top: 72px;
+}
+
+.what-card {
+  background: var(--white);
+  padding: 40px 36px;
+  position: relative;
+  transition: background 0.2s;
+}
+
+.what-card:hover { background: var(--light); }
+
+.what-num {
+  font-family: 'Ultra', serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  margin-bottom: 24px;
+}
+
+.what-card h3 {
+  font-family: 'Ultra', serif;
+  font-size: 22px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+  color: var(--black);
+}
+
+.what-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555550;
+}
+
+/* ── APPS SECTION ── */
+.apps {
+  background: var(--off-black);
+  padding: 120px 48px;
+}
+
+.apps-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 64px;
+}
+
+.apps h2 {
+  font-family: 'Ultra', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.apps-count {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.app-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-dark);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s, border-color 0.25s;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+.app-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+
+.app-card:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.12);
+}
+
+.app-card:hover::before { transform: scaleX(1); }
+
+.app-card-tag {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+
+.app-card h3 {
+  font-family: 'Ultra', serif;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.app-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+  max-width: 360px;
+  margin-bottom: 36px;
+}
+
+.app-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.2s;
+}
+
+.app-card:hover .app-link { color: var(--orange); }
+
+.app-link-arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.app-card:hover .app-link-arrow { transform: translateX(4px); }
+
+.app-card-coming {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.app-badge {
+  position: absolute; top: 28px; right: 28px;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.3);
+  border-radius: 2px;
+}
+
+.app-badge.live {
+  border-color: rgba(255,84,0,0.4);
+  color: var(--orange);
+}
+
+/* ── APP SCREENSHOT PREVIEW ── */
+.app-preview {
+  position: relative;
+  margin: 20px 0 24px;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  aspect-ratio: 16/9;
+  background: #0a0a0a;
+  cursor: pointer;
+}
+
+.app-preview img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.app-preview img.hidden { opacity: 0; position: absolute; top: 0; left: 0; }
+.app-preview img.visible { opacity: 1; }
+
+.preview-toggle {
+  position: absolute; bottom: 10px; right: 10px;
+  display: flex; gap: 4px; z-index: 2;
+}
+
+.ptab {
+  padding: 3px 10px; border-radius: 2px;
+  font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+  font-family: 'Questrial', sans-serif; cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.5); background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px); transition: all 0.15s;
+}
+
+.ptab.active { background: var(--orange); border-color: var(--orange); color: #000; }
+.ptab:hover:not(.active) { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+.app-card-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+
+.demo-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 20px; border-radius: 2px;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: 'Questrial', sans-serif; font-weight: 600;
+  background: var(--orange); color: #000; border: none;
+  cursor: pointer; text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.demo-btn:hover { opacity: 0.85; }
+
+.demo-btn-coming {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 20px; border-radius: 2px;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: 'Questrial', sans-serif;
+  background: transparent; color: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: default; text-decoration: none;
+}
+
+/* ── BRIEF OVERLAY ── */
+.brief-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); background: transparent; border: none;
+  cursor: pointer; font-family: 'Questrial', sans-serif;
+  padding: 0; transition: color 0.2s;
+  margin-top: 16px;
+}
+
+.brief-toggle:hover { color: var(--orange); }
+
+.brief-toggle .toggle-arrow {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+  font-style: normal;
+}
+
+.brief-toggle.open .toggle-arrow { transform: rotate(90deg); }
+.brief-toggle.open { color: var(--orange); }
+
+.brief-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+.brief-panel.open { max-height: 600px; }
+
+.brief-inner {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 16px;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.brief-block {}
+
+.brief-label {
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.brief-label::before {
+  content: ''; display: block;
+  width: 12px; height: 1px; background: var(--orange);
+}
+
+.brief-block p {
+  font-size: 13px; line-height: 1.7;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 0;
+}
+
+.brief-questions {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+.brief-questions li {
+  font-size: 13px; line-height: 1.5;
+  color: rgba(255,255,255,0.5);
+  display: flex; align-items: baseline; gap: 8px;
+}
+
+.brief-questions li::before {
+  content: attr(data-n);
+  font-size: 9px; letter-spacing: 0.06em;
+  color: var(--orange); flex-shrink: 0;
+  font-family: 'Ultra', serif;
+}
+
+@media (max-width: 600px) {
+  .brief-inner { grid-template-columns: 1fr; }
+}
+
+/* ── PHILOSOPHY ── */
+.philosophy {
+  background: var(--light);
+  color: var(--black);
+  padding: 120px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.philosophy-left {}
+
+.philosophy-left h2 {
+  font-family: 'Ultra', serif;
+  font-size: clamp(36px, 4vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+
+.philosophy-left p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555550;
+  margin-bottom: 16px;
+}
+
+.philosophy-left p strong {
+  color: var(--black);
+  font-weight: normal;
+}
+
+.philosophy-right {
+  display: flex; flex-direction: column; gap: 2px;
+}
+
+.principle {
+  padding: 28px 32px;
+  background: var(--white);
+  border-left: 3px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.principle:hover {
+  border-left-color: var(--orange);
+  background: #EAEAE6;
+}
+
+.principle-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+
+.principle h4 {
+  font-family: 'Ultra', serif;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  color: var(--black);
+}
+
+.principle p {
+  font-size: 13px;
+  line-height: 1.65;
+  color: #777770;
+  margin: 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  padding: 80px 48px 48px;
+  border-top: 1px solid var(--border-dark);
+}
+
+.footer-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 80px;
+}
+
+.footer-logo {
+  font-family: 'Ultra', serif;
+  font-size: 48px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.footer-logo span { color: var(--orange); }
+
+.footer-tagline {
+  margin-top: 12px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.02em;
+}
+
+.footer-links {
+  display: flex; flex-direction: column; gap: 12px;
+  list-style: none;
+}
+
+.footer-links a {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--white); }
+
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-dark);
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.04em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.on { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 0 24px 64px; }
+  .about-strip { padding: 16px 24px; }
+  .what, .apps, .philosophy, footer { padding-left: 24px; padding-right: 24px; }
+  .what-grid { grid-template-columns: 1fr; }
+  .apps-grid { grid-template-columns: 1fr; }
+  .philosophy { grid-template-columns: 1fr; gap: 48px; }
+  .apps-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-top { flex-direction: column; gap: 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sass<span class="nav-y">y</span><span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#apps">Apps</a></li>
+    <li><a href="#philosophy">About</a></li>
+    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-text">SASS<span style="color:rgba(255,84,0,0.025)">Y</span></div>
+  <div class="hero-tag">Creative Technology Studio</div>
+  <h1>Considered<br><em>small</em> things.</h1>
+  <p class="hero-sub">
+    We build <strong>micro-apps and internal tools</strong> for companies that are done waiting for enterprise software to catch up with how they actually work.
+  </p>
+  <div class="hero-scroll">Scroll <span></span></div>
+</section>
+
+<!-- ORANGE STRIP -->
+<div class="about-strip">
+  <p>Bespoke by default</p>
+  <div class="strip-dot"></div>
+  <p>Small surface. Big leverage.</p>
+  <div class="strip-dot"></div>
+  <p>Shipped fast. Built to last.</p>
+  <div class="strip-dot"></div>
+  <p>No bloat. No compromise.</p>
+  <div class="strip-dot"></div>
+  <p>Bespoke by default</p>
+  <div class="strip-dot"></div>
+  <p>Small surface. Big leverage.</p>
+</div>
+
+<!-- WHAT WE DO -->
+<section class="what" id="what">
+  <div class="section-tag">What we do</div>
+  <h2 class="reveal">The right tool<br>for the exact job.</h2>
+  <div class="what-grid">
+    <div class="what-card reveal">
+      <div class="what-num">01</div>
+      <h3>Internal Tools</h3>
+      <p>Roadmaps, trackers, dashboards and ops tools that actually fit your workflow. Built around how your team thinks, not how a SaaS vendor thinks you should.</p>
+    </div>
+    <div class="what-card reveal">
+      <div class="what-num">02</div>
+      <h3>Creative Apps</h3>
+      <p>Generative tools, interactive experiences and one-of-a-kind interfaces for brands and individuals who want something that doesn't look like everything else.</p>
+    </div>
+    <div class="what-card reveal">
+      <div class="what-num">03</div>
+      <h3>Micro Products</h3>
+      <p>Standalone web apps with a single job. Fast to build, fast to deploy, surprisingly powerful. The kind of thing that makes your team wonder why it took so long.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPS -->
+<section class="apps" id="apps">
+  <div class="apps-header">
+    <h2 class="reveal">The<br>portfolio.</h2>
+    <span class="apps-count">03 live — more coming</span>
+  </div>
+  <div class="apps-grid">
+
+    <div class="app-card">
+      <div class="app-badge live">Live</div>
+      <div class="app-card-tag">Internal Tool / Strategy</div>
+      <h3>Horizon Roadmap</h3>
+      <p>A multi-user product roadmap built around Now / Next / Later sprint groups. Dynamic grouping, drag-and-drop reordering, job stories, and real-time sync via Supabase.</p>
+      <div class="app-preview" onclick="togglePreview('horizon', event)">
+        <img id="horizon-img-0" src="01-keep-horizon-map-main.png" class="visible" alt="Horizon Roadmap main view" />
+        <img id="horizon-img-1" src="02-keep-horizon-map-detail.png" class="hidden" alt="Horizon Roadmap detail view" />
+        <div class="preview-toggle">
+          <button class="ptab active" onclick="switchPreview('horizon',0,event)">Overview</button>
+          <button class="ptab" onclick="switchPreview('horizon',1,event)">Detail</button>
+        </div>
+      </div>
+
+      <button class="brief-toggle" onclick="toggleBrief('horizon-brief', this)">
+        <i class="toggle-arrow">›</i> How we thought about it
+      </button>
+      <div class="brief-panel" id="horizon-brief">
+        <div class="brief-inner">
+          <div class="brief-block">
+            <div class="brief-label">The problem</div>
+            <p>Product teams were managing roadmaps in spreadsheets that couldn't group dynamically, show priority at a glance, or capture the thinking behind each initiative.</p>
+          </div>
+          <div class="brief-block">
+            <div class="brief-label">Questions it had to answer</div>
+            <ol class="brief-questions">
+              <li data-n="01">What are we working on right now vs. later?</li>
+              <li data-n="02">Why does each initiative matter?</li>
+              <li data-n="03">What's the scope and what does success look like?</li>
+              <li data-n="04">How do we capture ideas without losing them?</li>
+              <li data-n="05">Can the whole team see the same picture?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-card-footer" style="margin-top:20px;">
+        <div class="app-link">Horizon Roadmap <span class="app-link-arrow">↗</span></div>
+        <a class="demo-btn" href="https://cmeethree.github.io/keep-horizon-map/" target="_blank">Demo →</a>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-badge live">Live</div>
+      <div class="app-card-tag">Internal Tool / Operations</div>
+      <h3>Deployment Tracker</h3>
+      <p>A multi-launch readiness tracker built for healthcare program rollouts. Four-stage task status, owner assignment, board view across all launches, and live progress reporting. The thinking behind this tool became <a href="#" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(255,84,0,0.3);">Runway</a> — the generic version, built for any team launching anything.</p>
+      <div class="app-preview" onclick="togglePreview('deployment', event)">
+        <img id="deployment-img-0" src="01-keep-deployment-tracker-project-view.png" class="visible" alt="Deployment Tracker project view" />
+        <img id="deployment-img-1" src="02-keep-deployment-tracker-kanban-view.png" class="hidden" alt="Deployment Tracker kanban view" />
+        <div class="preview-toggle">
+          <button class="ptab active" onclick="switchPreview('deployment',0,event)">Project</button>
+          <button class="ptab" onclick="switchPreview('deployment',1,event)">Board</button>
+        </div>
+      </div>
+
+      <button class="brief-toggle" onclick="toggleBrief('deployment-brief', this)">
+        <i class="toggle-arrow">›</i> How we thought about it
+      </button>
+      <div class="brief-panel" id="deployment-brief">
+        <div class="brief-inner">
+          <div class="brief-block">
+            <div class="brief-label">The problem</div>
+            <p>Launching anything across multiple workstreams meant status lived in Slack threads, emails, and memory — no single place showed readiness across every moving part.</p>
+          </div>
+          <div class="brief-block">
+            <div class="brief-label">Questions it had to answer</div>
+            <ol class="brief-questions">
+              <li data-n="01">What needs to get done?</li>
+              <li data-n="02">Who's working on what?</li>
+              <li data-n="03">Where's everything at?</li>
+              <li data-n="04">What still needs to be done?</li>
+              <li data-n="05">Are we ready to launch?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-card-footer" style="margin-top:20px;">
+        <div class="app-link">Deployment Tracker <span class="app-link-arrow">↗</span></div>
+        <a class="demo-btn demo-btn-coming" href="#">Demo coming soon</a>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-badge live">Live</div>
+      <div class="app-card-tag">Internal Tool / Experience</div>
+      <h3>Patient Journey Map</h3>
+      <p>A stage-by-stage map of the full patient path from recruitment to active use — every touchpoint, every message, every owner visible in one place. The thinking behind this tool became <a href="#" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(255,84,0,0.3);">Wayfinder</a> — the generic version, built for any journey.</p>
+      <div class="app-preview">
+        <img id="wayfinder-img-0" src="03a-keep-journey-map-builder-noheader.png" class="visible" alt="Patient Journey Map" />
+      </div>
+
+      <button class="brief-toggle" onclick="toggleBrief('journey-brief', this)">
+        <i class="toggle-arrow">›</i> How we thought about it
+      </button>
+      <div class="brief-panel" id="journey-brief">
+        <div class="brief-inner">
+          <div class="brief-block">
+            <div class="brief-label">The problem</div>
+            <p>Patient journeys span multiple stages, channels, and owners — but no single view existed to see the full path, making it impossible to know where patients were dropping off or what was missing.</p>
+          </div>
+          <div class="brief-block">
+            <div class="brief-label">Questions it had to answer</div>
+            <ol class="brief-questions">
+              <li data-n="01">What stages does a patient move through?</li>
+              <li data-n="02">What touchpoints and messages exist at each stage?</li>
+              <li data-n="03">Who owns each part of the journey?</li>
+              <li data-n="04">Where are the gaps?</li>
+              <li data-n="05">Is nothing falling through?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-card-footer" style="margin-top:20px;">
+        <div class="app-link">Patient Journey Map <span class="app-link-arrow">↗</span></div>
+        <a class="demo-btn demo-btn-coming" href="#">Demo coming soon</a>
+      </div>
+    </div>
+
+    <div class="app-card app-card-coming">
+      <div class="app-badge">Coming soon</div>
+      <div class="app-card-tag">TBA</div>
+      <h3>TBA</h3>
+      <p>Another considered small thing. Details soon.</p>
+      <div class="app-card-footer" style="margin-top:24px;">
+        <div class="app-link" style="color:rgba(255,255,255,0.2)">In development <span class="app-link-arrow">→</span></div>
+        <span class="demo-btn-coming">Demo coming soon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-left">
+    <div class="section-tag">How we think</div>
+    <h2 class="reveal">Built on a<br>short manifesto.</h2>
+    <p>Most tools are built for the average case. Sassy builds for the specific case. <strong>One company, one problem, one tool that fits like it was made for it.</strong></p>
+    <p>We work fast because small things should be fast. We work carefully because the details are the product.</p>
+  </div>
+  <div class="philosophy-right reveal">
+    <div class="principle">
+      <div class="principle-label">01</div>
+      <h4>Small is a feature</h4>
+      <p>A tool that does one thing well beats a platform that does ten things adequately. Scope is a creative constraint, not a limitation.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-label">02</div>
+      <h4>Bespoke by default</h4>
+      <p>Every app is built for the person using it. No templates. No retrofitting. The brief is the design.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-label">03</div>
+      <h4>Ship it and sharpen it</h4>
+      <p>Fast first version. Refined over time. Better to have a working thing than a perfect spec.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-label">04</div>
+      <h4>The design is the product</h4>
+      <p>How something looks and how it works are the same question. We don't separate them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Sass<span style="color:var(--orange)">y</span><span>.</span></div>
+      <div class="footer-tagline">Considered small things — sassy.ventures</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#philosophy">About</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#9ff7faf3f3f0dfecfeecece6b1e9faf1ebeaedfaec"><span class="__cf_email__" data-cfemail="fb939e979794bb889a888882d58d9e958f8e899e88">[email&#160;protected]</span></a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Sassy. All rights reserved.</span>
+    <span>Built by Sassy — naturally.</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("on"); });
+}, { threshold: 0.1 });
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+// Screenshot preview toggle
+function switchPreview(tool, index, event) {
+  event.stopPropagation();
+  const imgs = document.querySelectorAll("[id^=" + tool + "-img-]");
+  const tabs = event.target.closest(".preview-toggle").querySelectorAll(".ptab");
+  imgs.forEach((img, i) => {
+    img.classList.toggle("visible", i === index);
+    img.classList.toggle("hidden", i !== index);
+  });
+  tabs.forEach((tab, i) => tab.classList.toggle("active", i === index));
+}
+
+function toggleBrief(id, btn) {
+  const panel = document.getElementById(id);
+  const isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+
+function togglePreview(tool, event) {
+  if (event.target.classList.contains("ptab")) return;
+  const imgs = document.querySelectorAll("[id^=" + tool + "-img-]");
+  let currentIndex = 0;
+  imgs.forEach((img, i) => { if (img.classList.contains("visible")) currentIndex = i; });
+  const nextIndex = (currentIndex + 1) % imgs.length;
+  const tabs = event.currentTarget.querySelectorAll(".ptab");
+  imgs.forEach((img, i) => {
+    img.classList.toggle("visible", i === nextIndex);
+    img.classList.toggle("hidden", i !== nextIndex);
+  });
+  tabs.forEach((tab, i) => tab.classList.toggle("active", i === nextIndex));
+}
+</script>
+</body>
+</html>
