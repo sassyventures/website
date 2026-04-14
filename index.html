@@ -932,8 +932,8 @@ footer {
       <h3>Investor Summary</h3>
       <p>A structured investor update that goes beyond the numbers — narrative, pipeline, metrics, and product progress in a single shareable document. Built to communicate clearly to capital every quarter.</p>
       <div class="app-preview" onclick="togglePreview('investor', event)">
-        <img id="investor-img-0" src="5-investor-summary/05a-investor-summary.png" class="visible" alt="Investor Summary narrative view" />
-        <img id="investor-img-1" src="5-investor-summary/05b-investor-summary.png" class="hidden" alt="Investor Summary pipeline view" />
+        <img id="investor-img-0" src="5-investor-summary/05c-investor-summary.png" class="visible" alt="Investor Summary narrative view" />
+        <img id="investor-img-1" src="5-investor-summary/05d-investor-summary.png" class="hidden" alt="Investor Summary pipeline view" />
         <div class="preview-toggle">
           <button class="ptab active" onclick="switchPreview('investor',0,event)">Narrative</button>
           <button class="ptab" onclick="switchPreview('investor',1,event)">Pipeline</button>
@@ -971,13 +971,15 @@ footer {
       <div class="app-badge live">Live</div>
       <div class="app-card-tag">Reporting / Operations</div>
       <h3>Weekly Engagement Report</h3>
-      <p>Two tools, one pipeline. Drop your CSVs into the generator, set the date range - the report builds itself through a Claude API automation. No formatting, no copy-paste, no manual work. The output is a polished weekly snapshot ready to share with your team and investors.</p>
+      <p>Two tools, one pipeline. Simply upload CSVs into the generator, set the date range - the report builds itself through a Claude API automation. No formatting, no copy-paste, no manual work. The output is a polished weekly snapshot ready to share with your team and investors.</p>
       <div class="app-preview" onclick="togglePreview('weekly', event)">
-        <img id="weekly-img-0" src=" 4-weekly-report/1-weekly-status-report.png" class="visible" alt="Weekly Status Report" />
-        <img id="weekly-img-1" src="4-weekly-report/2-weekly-status-generator.png" class="hidden" alt="Weekly Report Generator" />
+        <img id="weekly-img-0" src=" 4-weekly-report/1c-weekly-status-report.png" class="visible" alt="Weekly Status Report Summary" />
+        <img id="weekly-img-1" src="4-weekly-report/1d-weekly-status-report.png" class="hidden" alt="Weekly Report Detail" />
+        <img id="weekly-img-2" src="4-weekly-report/2a-weekly-status-report.png" class="hidden" alt="Weekly Report Generator" />
         <div class="preview-toggle">
-          <button class="ptab active" onclick="switchPreview('weekly',0,event)">Report</button>
-          <button class="ptab" onclick="switchPreview('weekly',1,event)">Generator</button>
+          <button class="ptab active" onclick="switchPreview('weekly',0,event)">Summary</button>
+          <button class="ptab" onclick="switchPreview('weekly',1,event)">Detail</button>
+           <button class="ptab" onclick="switchPreview('weekly',2,event)">Generator</button>
         </div>
       </div>
       <button class="brief-toggle" onclick="toggleBrief('weekly-brief', this)">
