@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -846,10 +845,10 @@ footer {
       <div class="app-badge live">Live</div>
       <div class="app-card-tag">Operational / Launch Tracking</div>
       <h3>Deployment Tracker</h3>
-      <p>A multi-launch readiness tracker built for healthcare program rollouts. Four-stage task status, owner assignment, board view across all launches, and live progress reporting. The thinking behind this became <a href="https://sassyventures.github.io/runway/" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(255,84,0,0.3);">Runway</a> — the generic version.</p>
+      <p>A multi-launch readiness tracker built for healthcare program rollouts. Four-stage task status, owner assignment, kanban board view across all launches, and live progress reporting.</p>
       <div class="app-preview" onclick="togglePreview('deployment', event)">
         <img id="deployment-img-0" src="2-Runway/02a-keep-deployment-tracker-project-view.png" class="visible" alt="Deployment Tracker project view" />
-        <img id="deployment-img-1" src="2-Runway/02b-keep-deployment-tracker-kanban-view.png" class="hidden" alt="Deployment Tracker kanban view" />
+        <img id="deployment-img-1" src="2-Runway/02c-keep-deployment-tracker-kanban-view" class="hidden" alt="Deployment Tracker kanban view" />
         <div class="preview-toggle">
           <button class="ptab active" onclick="switchPreview('deployment',0,event)">Project</button>
           <button class="ptab" onclick="switchPreview('deployment',1,event)">Board</button>
@@ -886,7 +885,7 @@ footer {
       <div class="app-badge live">Live</div>
       <div class="app-card-tag">Operational / Experience</div>
       <h3>Patient Journey Map</h3>
-      <p>A stage-by-stage map of the full patient path from recruitment to active use — every touchpoint, every message, every owner visible in one place. The thinking behind this became <a href="#" style="color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(255,84,0,0.3);">Wayfinder</a> — the generic version.</p>
+      <p>A stage-by-stage map of the full patient path from recruitment to active use — every touchpoint, every message, every owner visible in one place.</p>
       <div class="app-preview">
         <img id="journey-img-0" src="3-Journey-Map/03a-journey-map-builder-noheader.png" class="visible" alt="Patient Journey Map" />
       </div>
@@ -972,13 +971,13 @@ footer {
       <div class="app-badge live">Live</div>
       <div class="app-card-tag">Reporting / Operations</div>
       <h3>Weekly Status Report</h3>
-      <p>Two tools, one pipeline. Drop your CSVs into the generator, set the date range — the report builds itself. No formatting, no copy-paste, no manual work. The output is a polished weekly snapshot ready to share with your team and investors.</p>
+      <p>Two tools, one pipeline. Drop your CSVs into the generator, set the date range - the report builds itself through a Claude API automation. No formatting, no copy-paste, no manual work. The output is a polished weekly snapshot ready to share with your team and investors.</p>
       <div class="app-preview" onclick="togglePreview('weekly', event)">
-        <img id="weekly-img-0" src="4-weekly-report/2-weekly-status-generator.png" class="visible" alt="Weekly Report Generator" />
-        <img id="weekly-img-1" src="4-weekly-report/1-weekly-status-report.png" class="hidden" alt="Weekly Status Report output" />
+        <img id="weekly-img-0" src=" 4-weekly-report/1-weekly-status-report.png" class="visible" alt="Weekly Status Report" />
+        <img id="weekly-img-1" src="4-weekly-report/2-weekly-status-generator.png" class="hidden" alt="Weekly Report Generator" />
         <div class="preview-toggle">
-          <button class="ptab active" onclick="switchPreview('weekly',0,event)">Generator</button>
-          <button class="ptab" onclick="switchPreview('weekly',1,event)">Report</button>
+          <button class="ptab active" onclick="switchPreview('weekly',0,event)">Report</button>
+          <button class="ptab" onclick="switchPreview('weekly',1,event)">Generator</button>
         </div>
       </div>
       <button class="brief-toggle" onclick="toggleBrief('weekly-brief', this)">
