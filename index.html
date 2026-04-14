@@ -973,13 +973,15 @@ footer {
       <h3>Weekly Engagement Report</h3>
       <p>Two tools, one pipeline. Simply upload CSVs into the generator, set the date range - the report builds itself through a Claude API automation. No formatting, no copy-paste, no manual work. The output is a polished weekly snapshot ready to share with your team and investors.</p>
       <div class="app-preview" onclick="togglePreview('weekly', event)">
-        <img id="weekly-img-0" src=" 4-weekly-report/1c-weekly-status-report.png" class="visible" alt="Weekly Status Report Summary" />
+        <img id="weekly-img-0" src="4-weekly-report/1c-weekly-status-report.png" class="visible" alt="Weekly Status Report Summary" />
         <img id="weekly-img-1" src="4-weekly-report/1d-weekly-status-report.png" class="hidden" alt="Weekly Report Detail" />
         <img id="weekly-img-2" src="4-weekly-report/2a-weekly-status-generator.png" class="hidden" alt="Weekly Report Generator" />
+        <img id="weekly-img-3" src="4-weekly-report/3a-weekly-status-index.png" class="hidden" alt="Weekly Report Index" />
         <div class="preview-toggle">
           <button class="ptab active" onclick="switchPreview('weekly',0,event)">Summary</button>
           <button class="ptab" onclick="switchPreview('weekly',1,event)">Detail</button>
-           <button class="ptab" onclick="switchPreview('weekly',2,event)">Generator</button>
+          <button class="ptab" onclick="switchPreview('weekly',2,event)">Generator</button>
+          <button class="ptab" onclick="switchPreview('weekly',3,event)">Index</button>
         </div>
       </div>
       <button class="brief-toggle" onclick="toggleBrief('weekly-brief', this)">
