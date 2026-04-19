@@ -1018,6 +1018,50 @@ footer {
       </div>
     </div>
 
+    <div class="app-card">
+      <div class="app-badge live">Live</div>
+      <div class="app-card-tag">Intelligence / Retention</div>
+      <h3>Customer Intelligence Report</h3>
+      <p>A fully interactive intelligence report built on longitudinal account data. Six key insights, animated data visualisations, account archetypes, and recommended actions — all expandable, all linked to specific interventions. Built to turn raw engagement signals into a shareable strategic document.</p>
+        <div class="app-preview" onclick="togglePreview('intelligence', event)">
+            <img id="intelligence-img-0" src="5-intelligence-report/1-intelligence-hero.png" class="visible" alt="Intelligence Report Hero" />
+            <img id="intelligence-img-1" src="5-intelligence-report/2-intelligence-insights.png" class="hidden" alt="Intelligence Report Insights" />
+            <img id="intelligence-img-2" src="5-intelligence-report/3-intelligence-data.png" class="hidden" alt="Intelligence Report Data" />
+            <img id="intelligence-img-3" src="5-intelligence-report/4-intelligence-profiles.png" class="hidden" alt="Intelligence Report Profiles" />
+        <div class="preview-toggle">
+          <button class="ptab active" onclick="switchPreview('intelligence',0,event)">Hero</button>
+          <button class="ptab" onclick="switchPreview('intelligence',1,event)">Insights</button>
+          <button class="ptab" onclick="switchPreview('intelligence',2,event)">Data</button>
+          <button class="ptab" onclick="switchPreview('intelligence',3,event)">Profiles</button>
+        </div>
+      </div>
+      <button class="brief-toggle" onclick="toggleBrief('intelligence-brief', this)">
+        <i class="toggle-arrow">›</i> How we thought about it
+      </button>
+      <div class="brief-panel" id="intelligence-brief">
+        <div class="brief-inner">
+          <div class="brief-block">
+            <div class="brief-label">The problem</div>
+            <p>Customer data revealed patterns that weren't visible in a dashboard — behavioural signals that preceded churn by weeks, not days. The insight existed in the data. What was missing was a format that made it actionable for CS, product, and leadership without a data analyst in the room.</p>
+          </div>
+          <div class="brief-block">
+            <div class="brief-label">Questions it had to answer</div>
+            <ol class="brief-questions">
+              <li data-n="01">What are the early signals before an account churns?</li>
+              <li data-n="02">Which account archetypes are most at risk and why?</li>
+              <li data-n="03">How much intervention time do we actually have?</li>
+              <li data-n="04">What should CS do differently — and when?</li>
+              <li data-n="05">Can we send this to leadership without a briefing call?</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="app-card-footer" style="margin-top:20px;">
+        <div class="app-link">Customer Intelligence Report <span class="app-link-arrow">↗</span></div>
+        <a class="demo-btn" href="https://sassyventures.github.io/intelligence/" target="_blank">Demo →</a>
+      </div>
+    </div>
+
   </div>
 
 </section>
